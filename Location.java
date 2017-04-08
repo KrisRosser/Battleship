@@ -32,7 +32,7 @@ public class Location {
 		
 	}
 	
-	public boolean setHit(boolean t){
+	public void setHit(boolean t){
 		
 		this.hit = t;
 		
@@ -44,7 +44,7 @@ public class Location {
 		
 	}
 	
-	public boolean setHit(boolean t){
+	public void setHit(boolean t){
 		
 		this.miss = t;
 		
