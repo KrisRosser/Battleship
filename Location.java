@@ -1,14 +1,21 @@
 
 public class Location {
-    public enum Type {SHIP, EMPTY, HIT, MISS};
-    private Type type;
+    public enum Type {SHIP, EMPTY} 
+	private Type type;
     
+	public boolean hit;
+	public boolean miss;
+	
     public Location() {
 		this.type = Type.EMPTY;
+		this.hit = false;
+		this.miss = false;
 	}
         
     public void reset() {
 		this.type = Type.EMPTY;
+		this.hit = false;
+		this.miss = false;
 	}
     
     public Type getType() { 
@@ -18,4 +25,28 @@ public class Location {
     public void setType(Type t) { 
 		this.type = t;
     }
+	
+	public boolean hasHit() {
+		
+		return hit;
+		
+	}
+	
+	public boolean setHit(boolean t){
+		
+		this.hit = t;
+		
+	}
+	
+	public boolean hasMiss() {
+		
+		return miss;
+		
+	}
+	
+	public boolean setHit(boolean t){
+		
+		this.miss = t;
+		
+	}
 }
