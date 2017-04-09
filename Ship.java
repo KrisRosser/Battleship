@@ -1,7 +1,7 @@
 public class Ship{
 	public int health;
 	public Location[] location;						
-	public enum ShipType {CARRIER, BATTLESHIP, CRUISER, SUBMARINE};	
+	public enum ShipType {CARRIER, BATTLESHIP, CRUISER, SUBMARINE, DESTROYER};	
 	public ShipType shipType;
 	
 	public Ship(){

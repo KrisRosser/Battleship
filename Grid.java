@@ -6,7 +6,7 @@ public class Grid extends Observable {
     private Random random;
 	
 	  public Grid() {
-		this(8,8,10);
+		this(10,10);
     }
     
     public Grid(int width, int height, Ship[] ship) {
