@@ -3,6 +3,7 @@ public class Ship{
 	public Location[] location;						
 	public enum ShipType {CARRIER, BATTLESHIP, CRUISER, SUBMARINE, DESTROYER};	
 	public ShipType shipType;
+	public boolean vertical;
 	
 	public Ship(){
 		health = 0;
@@ -32,6 +33,18 @@ public class Ship{
 	public ShipType getShipType(){
 		
 		return shipType;
+		
+	}
+	
+	public void setVertical(boolean t){
+		
+		this.vertical = t;
+		
+	}
+	
+	public boolean getVertical(){
+		
+		return vertical;
 		
 	}
 }	
