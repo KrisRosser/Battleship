@@ -2,7 +2,8 @@
 public class Location {
     public enum Type {SHIP, EMPTY} 
 	private Type type;
-    
+    public int row;
+	public int col;
 	public boolean hit;
 	public boolean miss;
 	
@@ -26,7 +27,7 @@ public class Location {
 		this.type = t;
     }
 	
-	public boolean hasHit() {
+	public boolean getHit() {
 		
 		return hit;
 		
@@ -38,15 +39,27 @@ public class Location {
 		
 	}
 	
-	public boolean hasMiss() {
+	public boolean getMiss() {
 		
 		return miss;
 		
 	}
 	
-	public void setHit(boolean t){
+	public void setMiss(boolean t){
 		
 		this.miss = t;
 		
+	}
+	public void setRow(int r){
+		row = r;
+	}
+	public void setCol(int c){
+		col = c;
+	}
+	public int getRow(){
+		return this.row;
+	}
+	public int getCol(){
+		return this.col;
 	}
 }

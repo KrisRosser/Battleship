@@ -5,25 +5,31 @@ public class Ship{
 	public ShipType shipType;
 	public boolean vertical;
 	
-	public Ship(){
-		health = 0;
-	}	
 	
-	public Ship(Location[] l, ShipType t){
-		
-		health = l.size;
-		location = l;
+	public Ship(ShipType t){
 		shipType = t;
-		
+		this.setHealth();
 	}
 	
 	public void setLocation(Location[] location){
 		this.location = location;
 	}	
 	public void setHealth(){
-		health = location.size;
+		if(shipType == ShipType.CARRIER)health = 5;
+		else if (shipType == ShipType.BATTLESHIP)health = 4;
+		else if (shipType == ShipType.CRUISER)health = 3;
+		else if(shipType == ShipType.SUBMARINE)health = 3;
+		else health = 2;
 	}
-
+	
+	public int getHealth(){
+		return this.health;
+	}
+	
+	public void takesHit(){
+		this.health--;
+	}
+	
 	public void setShipType(ShipType t){
 		
 		this.shipType = t;
