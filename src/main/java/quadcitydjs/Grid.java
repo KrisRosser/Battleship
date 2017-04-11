@@ -1,3 +1,5 @@
+package quadcitydjs;
+
 import java.util.*;
 
 public class Grid extends Observable {
@@ -5,7 +7,6 @@ public class Grid extends Observable {
     
     private Location[][] location;
     private Ship[] ship;
-    private Random random;
 	private int shipCount;
 	private int shipSunk;
 	
@@ -14,6 +15,10 @@ public class Grid extends Observable {
     }
         
 	public Grid(int width, int height) {
+		this(width, height, false);
+    }
+	
+	public Grid(int width, int height, boolean ai) {
 		location = new Location[height][width];
 		shipSunk = 0;
         for(int i = 0; i < getHeight(); i++){
@@ -25,32 +30,18 @@ public class Grid extends Observable {
         }
 		createFleet();
 		this.shipCount = 5;
-    }
-	
-	public Grid(int width, int height, boolean ai) {
-		if(ai){
-			random = new Random();
-			shipSunk = 0;
-			location = new Location[height][width];                    
-			for(int i = 0; i < getHeight(); i++){
-				for(int j = 0; j < getWidth(); j++){
-					location[i][j] = new Location();
-					location[i][j].setRow(i);
-					location[i][j].setCol(j);
-				}
-			}
-        }
-		createFleet();
-		this.shipCount = 5;
-		for(int i=0; i < ship.length; i++){
-			int bool = random.nextInt(2);
-			if(bool==0)	ship[i].setVertical(false);
-			else ship[i].setVertical(true);
-		}
-		while(shipCount != 0){
-			setShipLocation(random.nextInt(10), random.nextInt(10), ship[shipCount-1]);
-		}
 		
+		if(ai){
+			Random random = new Random();
+			for(int i=0; i < ship.length; i++){
+				boolean bool = random.nextBoolean();
+				if(bool) ship[i].setVertical(false);
+				else ship[i].setVertical(true);
+			}
+			while(shipCount > 0){
+				setShipLocation(random.nextInt(10), random.nextInt(10), ship[shipCount-1]);
+			}
+		}
     }
 	
 	public Location getLocation(int row, int col) {
@@ -86,7 +77,7 @@ public class Grid extends Observable {
 					}
 					if(location.length == s.getHealth()){
 						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row+j, col).setType(Location.Type.SHIP);
+							getLocation(row+j, col).setShip(true);
 						}
 						s.setLocation(location);
 						shipCount--;
@@ -100,7 +91,7 @@ public class Grid extends Observable {
 					}
 					if(location.length == s.getHealth()){
 						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row, col+j).setType(Location.Type.SHIP);
+							getLocation(row, col+j).setShip(true);
 						}
 						s.setLocation(location);
 						shipCount--;
@@ -111,19 +102,19 @@ public class Grid extends Observable {
 		
 	}
 	private boolean isEmpty(int row, int col) {
-        return (getLocation(row, col).getType() == Location.Type.EMPTY);
+        return (!getLocation(row, col).hasShip());
     }
 	
 	private boolean isShip(int row, int col) {
-        return (getLocation(row, col).getType() == Location.Type.SHIP);
+        return (getLocation(row, col).hasShip());
     }
 	
 	public boolean isHit(int row, int col) {
-        return (getLocation(row, col).getHit());			
+        return (getLocation(row, col).isHit());			
     }
 	
 	public boolean isMiss(int row, int col){
-		return (getLocation(row, col).getMiss());
+		return (getLocation(row, col).isMiss());
 	}
 	
 	public void shipHit(Ship s){

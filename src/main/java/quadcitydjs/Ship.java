@@ -1,3 +1,5 @@
+package quadcitydjs;
+
 public class Ship{
 	public int health;
 	public Location[] location;						

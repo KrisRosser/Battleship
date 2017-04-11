@@ -1,0 +1,44 @@
+buildscript {
+    dependencies {
+        classpath files(mkdir('build/classes/main'))
+        classpath files(mkdir('build/resources/main'))
+        classpath 'org.robotframework:swinglibrary:1.9.6'
+    }
+}
+plugins {
+  id 'org.roboscratch.robot' version '0.1.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'quadcitydjs.Main'
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Battleship', 
+                   'Implementation-Version': version, 
+                   'Main-Class': 'quadcitydjs.Main'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', 
+                name: 'junit', 
+                version: '4.+'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+runrobot.debugfile = 'debug.log'
+runrobot.dependsOn build
