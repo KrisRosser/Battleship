@@ -53,6 +53,7 @@ public class Grid extends Observable {
     }
 	
 	public void createFleet(){
+		ship = new Ship[5];
 		ship[0] = new Ship(Ship.ShipType.CARRIER);
 		ship[1] = new Ship(Ship.ShipType.BATTLESHIP);
 		ship[2] = new Ship(Ship.ShipType.CRUISER);

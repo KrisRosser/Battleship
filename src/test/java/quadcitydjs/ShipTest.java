@@ -23,11 +23,22 @@ public class ShipTest {
 		assertEquals(1, d.getHealth());
     }
 	
+	@Test
 	public final void testGetShipType() {
 		Ship d = new Ship(Ship.ShipType.DESTROYER);
 		d.takesHit();
-		assertEquals("DESTROYER", d.getShipType());
+		assertEquals(Ship.ShipType.DESTROYER, d.getShipType());
     }
+	
+	@Test
+	public final void testSetVertical() {
+		Ship d = new Ship(Ship.ShipType.DESTROYER);
+		d.setVertical(true);
+		assertTrue(d.getVertical());
+		d.setVertical(false);
+		assertFalse(d.getVertical());
+    }
+	
 }
 
 

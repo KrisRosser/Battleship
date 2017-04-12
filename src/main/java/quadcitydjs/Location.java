@@ -2,8 +2,8 @@ package quadcitydjs;
 
 
 public class Location {
-    public enum Type {SHIP, EMPTY} 
-	public enum State {CLEAR, HIT}
+    /*public enum Type {SHIP, EMPTY} 
+	public enum State {CLEAR, HIT}*/
 	private boolean ship;
 	private boolean fired;
     private int row;
@@ -19,7 +19,7 @@ public class Location {
 		fired = false;
 	}
     
-    public boolean hasShip() { 			//does this location contain a iece of a ship
+    public boolean hasShip() { 			//does this location contain a piece of a ship
         return ship;
     }
     
