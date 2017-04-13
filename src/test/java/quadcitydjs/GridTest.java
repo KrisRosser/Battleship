@@ -16,7 +16,7 @@ public class GridTest {
 		assertEquals(10, grid.getHeight());
 		assertEquals(10, grid.getWidth());
     }
-		
+	
 	@Test
     public final void testAIConstructor() {
 		boolean ai = true;
@@ -26,13 +26,13 @@ public class GridTest {
 		assertEquals(10, grid.getWidth());
 		for(int i=0; i<10;i++){
 			for(int j=0; j<10; j++){
-				if(grid.getLocation(i, j).hasShip())	sCheck++;
+				if(grid.getLocation(i, j).hasShip()){	
+					sCheck++;
+					System.out.println("Rosser"+ ("" + sCheck));
+				}
 			}
 		}
-		
-		System.out.println("Rosser"+ ("" + sCheck));
 		assertEquals(17, sCheck);
-		
 	}
 	
     
