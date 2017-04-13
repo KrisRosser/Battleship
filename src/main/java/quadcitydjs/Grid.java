@@ -1,6 +1,7 @@
 package quadcitydjs;
 
 import java.util.*;
+import java.awt.*;
 
 public class Grid extends Observable {
     public enum Result {NONE, WIN, LOSE};
@@ -68,40 +69,32 @@ public class Grid extends Observable {
         return location.length;
     }
     
-    public void setShipLocation(int row, int col, Ship s){
-		Location[] location = new Location[s.getHealth()];
-		if(isLegalIndex(row,col)){
-			if(s.getVertical()){
-				for(int i = 0; i < s.getHealth(); i++){
-					if(isLegalIndex(row+i,col)){
-						location[i] = getLocation(row+i,col);
-					}
-					if(location.length == s.getHealth()){
-						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row+j, col).setShip(true);
-						}
-						s.setLocation(location);
-						shipCount--;
-					}
-				}
-			}
-			else{
-				for(int i = 0; i < s.getHealth(); i++){
-					if(isLegalIndex(row,col+i)){
-						location[i] = getLocation(row,col+i);
-					}
-					if(location.length == s.getHealth()){
-						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row, col+j).setShip(true);
-						}
-						s.setLocation(location);
-						shipCount--;
-					}
-				}
-			}
+    private boolean allLocValid(Location [] loc){
+		for(int i =0; i < loc.length; i++){
+			if (loc[i]==null) return false;
 		}
-		
+		return true;
 	}
+	
+	public void setShipLocation(int row, int col, Ship s){
+		Location[] location = new Location[s.getHealth()];
+        Point[] locs = new Point[location.length];
+        int dx = 0;
+        int dy = 0;
+        if(s.getVertical()) dy = 1;
+        else dx = 1;
+        for(int i = 0; i < locs.length; i++) {
+            locs[i] = new Point(row + i*dx, col + i*dy);
+            if(!isLegalIndex(locs[i].x, locs[i].y)) return;
+        }
+        for(int i = 0; i < locs.length; i++){
+		location[i] = this.location[locs[i].x][locs[i].y];
+            location[i].setShip(true);
+        }
+        s.setLocation(location);
+        shipCount--;
+	}
+	
 	private boolean isEmpty(int row, int col) {
         return (!getLocation(row, col).hasShip());
     }

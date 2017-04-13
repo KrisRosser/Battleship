@@ -29,7 +29,9 @@ public class GridTest {
 				if(grid.getLocation(i, j).hasShip())	sCheck++;
 			}
 		}
-		/*assertEquals(17, sCheck);*/
+		System.out.println("Rosser"+ ("" + sCheck));
+		assertEquals(17, sCheck);
+		
 	}
 	
     
