@@ -38,7 +38,11 @@ public class ShipTest {
 		d.setVertical(false);
 		assertFalse(d.getVertical());
     }
-	
+	@Test
+    public final void testCruiserConstructor() {
+		Ship d = new Ship(Ship.ShipType.CRUISER);
+		assertEquals(3, d.getHealth());
+    }
 }
 
 
