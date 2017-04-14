@@ -9,7 +9,7 @@ public class Grid extends Observable {
     private Location[][] location;
     private Ship[] ship;
 	private int shipCount;
-	private int shipSunk;
+	private int shipsSunk;
 	
 	public Grid() {
 		this(10,10);
@@ -21,7 +21,7 @@ public class Grid extends Observable {
 	
 	public Grid(int width, int height, boolean ai) {
 		location = new Location[height][width];
-		shipSunk = 0;
+		shipsSunk = 0;
         for(int i = 0; i < getHeight(); i++){
             for(int j = 0; j < getWidth(); j++){
                 location[i][j] = new Location();
@@ -49,7 +49,7 @@ public class Grid extends Observable {
         return location[row][col];		
 	}	
 	
-	private boolean isLegalIndex(int row, int col) {
+	public boolean isLegalIndex(int row, int col) {
 		return ((row >= 0 && row < getHeight())&& (col >= 0 && col < getWidth()));
     }
 	
@@ -84,8 +84,9 @@ public class Grid extends Observable {
         if(s.getVertical()) dy = 1;
         else dx = 1;
         for(int i = 0; i < locs.length; i++) {
-            locs[i] = new Point(row + i*dx, col + i*dy);
+            locs[i] = new Point(row + i*dy, col + i*dx);
             if(!isLegalIndex(locs[i].x, locs[i].y)) return;
+			if(getLocation(locs[i].x, locs[i].y).hasShip()) return;
         }
         for(int i = 0; i < locs.length; i++){
 		location[i] = this.location[locs[i].x][locs[i].y];
@@ -111,15 +112,19 @@ public class Grid extends Observable {
 		return (getLocation(row, col).isMiss());
 	}
 	
+	public int shipsSunk(){
+		return shipsSunk;
+	}
+	
 	public void shipHit(Ship s){
 		s.takesHit();
 		if(s.getHealth()==0){
-			shipSunk++;
+			shipsSunk++;
 		}
 	}
 	
 	public Result getResult(){
-		if(shipSunk == 5){
+		if(shipsSunk == 5){
 			return Result.LOSE;
 		}
 		else{
