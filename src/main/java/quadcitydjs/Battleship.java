@@ -281,5 +281,5 @@ public class Battleship extends JPanel implements ActionListener {
 	}
 	
 	
-	// make it rain ships, add icons to when ships are shot and shit, change icons of places that have ships, finish AI, set icons for player ships on ther side so they can know what the fuck is going on
+	// add ships, add icons to when ships are shot and shit, change icons of places that have ships, finish AI, set icons for player ships on ther side so they can know what the fuck is going on
 }
