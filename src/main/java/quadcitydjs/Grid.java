@@ -150,6 +150,11 @@ public class Grid extends Observable {
 				return p;
 			}
 			}			
+<<<<<<< HEAD
 		}	
+=======
+		}
+		return p;
+>>>>>>> bb39c41bab672c221951ffebe5e0dacab74305ab
 	}	
 }
