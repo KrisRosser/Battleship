@@ -16,6 +16,9 @@ public class Ship{
 	public void setLocation(Location[] location){					//when you place the ship, tell it the locations it is on
 		this.location = location;
 	}	
+	public Location[] getLocation(){
+		return location;
+	}	
 	public void setHealth(){										// sets number of hits ship can take based on its size
 		if(shipType == ShipType.CARRIER)health = 5;
 		else if (shipType == ShipType.BATTLESHIP)health = 4;

@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Point;
 
 /* I am thnking that this class will handle the GUI much like minesweeper. I also believe that we should use
 the enable option should be used to distinguish between the two players. Maybe add a player_enable and AI_enable. I also think this class
@@ -50,10 +51,10 @@ public class Battleship extends JPanel implements ActionListener {
 		gridAI = new Grid(height, width, true);
 		JPanel gridAIPanel = new JPanel();
 		gridAIPanel.setLayout(new GridLayout(height, width));
-		AI_tile = new JLabel[height][width];
+		AI_button = new JButton[height][width];
 		for(int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
-				AI_button[i][j] = new JLabel();
+				AI_button[i][j] = new JButton();
 				AI_button[i][j].setName("cell:" + i + ":" + j);
 				AI_button[i][j].setPreferredSize(new Dimension(50,50));
 				AI_button[i][j].setHorizontalAlignment(0);
@@ -64,13 +65,12 @@ public class Battleship extends JPanel implements ActionListener {
 			}
 		}
 		grid = new Grid(height, width);
-		grid.addObserver(this);
 		JPanel gridPanel = new JPanel();
 		gridPanel.setLayout(new GridLayout(height, width));
-		tile = new JLabel[height][width];
+		button = new JButton[height][width];
 		for(int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
-				button[i][j] = new JLabel();
+				button[i][j] = new JButton();
 				button[i][j].setName("cell:" + i + ":" + j);
 				button[i][j].setPreferredSize(new Dimension(50,50));
 				button[i][j].setHorizontalAlignment(0);
@@ -105,17 +105,17 @@ public class Battleship extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 	if(player_enabled){
 		JButton button_temp = new JButton();
-		button_temp = event.getSource();
+		button_temp = (JButton)event.getSource();
 		Point p = findSourceIndex(event);
-		if(grid_AI.isEmpty(p.x, p.y)) {
-			grid_AI.isMiss(p.x, p.y);
-			button_AI[p.x][p.y].setEnabled(false);
+		if(gridAI.isEmpty(p.x, p.y)) {
+			gridAI.isMiss(p.x, p.y);
+			AI_button[p.x][p.y].setEnabled(false);
 			player_enabled = false;
 			AI();
 		}
-		if(grid_AI.isShip(p.x, p.y)) {
-			grid_AI.isHit(p.x, p.y);
-			button_AI[p.x][p.y].setEnabled(false);
+		if(gridAI.isShip(p.x, p.y)) {
+			gridAI.isHit(p.x, p.y);
+			AI_button[p.x][p.y].setEnabled(false);
 			player_enabled = false;
 			AI();
 		}
@@ -123,7 +123,7 @@ public class Battleship extends JPanel implements ActionListener {
 	}
 	
 	 private Point findSourceIndex(ActionEvent event) {
-		Point p = event.getPoint();
+		Point p = new Point();
 		Component c = (Component)event.getSource();
 		if(c.getName().startsWith("cell")){
 			String s = c.getName();
@@ -158,13 +158,15 @@ public class Battleship extends JPanel implements ActionListener {
 			AI();
 		}	
 	}
-		public void setShipIcons(){
+	public void setShipIcons(){
 		int shipIcon;
+		Ship[] ship = grid.getShipArray();
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < ship[i].getHealth(); j++){
 				if(ship[i].getShipType() == Ship.ShipType.CARRIER){
 					shipIcon = 5;
-					Point p = Grid.findLocation(grid.ship[i].location[j]);
+					Location[] loc = ship[i].getLocation(); 
+					Point p = grid.findLocation(loc[i]);
 					if(ship[i].getShipType().getVertical()){
 						
 					}
@@ -192,7 +194,8 @@ public class Battleship extends JPanel implements ActionListener {
 				}
 				if(ship[i].getShipType() == Ship.ShipType.BATTLESHIP){
 					shipIcon = 4;
-					Point p = Grid.findLocation(grid.ship[i].location[j]);
+					Location[] loc = ship[i].getLocation(); 
+					Point p = grid.findLocation(loc[i]);
 					if(ship[i].getShipType().getVertical()){
 						
 					}
@@ -216,7 +219,8 @@ public class Battleship extends JPanel implements ActionListener {
 				}
 				if(ship[i].getShipType() == Ship.ShipType.CRUISER){
 					shipIcon = 3;
-					Point p = Grid.findLocation(grid.ship[i].location[j]);
+					Location[] loc = ship[i].getLocation(); 
+					Point p = grid.findLocation(loc[i]);
 					if(ship[i].getShipType().getVertical()){
 						
 					}
@@ -236,7 +240,8 @@ public class Battleship extends JPanel implements ActionListener {
 				}
 				if(ship[i].getShipType() == Ship.ShipType.SUBMARINE){
 					shipIcon = 3;
-					Point p = Grid.findLocation(grid.ship[i].location[j]);
+					Location[] loc = ship[i].getLocation(); 
+					Point p = grid.findLocation(loc[i]);
 					if(ship[i].getShipType().getVertical()){
 						
 					}
@@ -256,7 +261,8 @@ public class Battleship extends JPanel implements ActionListener {
 				}
 				if(ship[i].getShipType() == Ship.ShipType.DESTROYER){
 					shipIcon = 3;
-					Point p = Grid.findLocation(grid.ship[i].location[j]);
+					Location[] loc = ship[i].getLocation(); 
+					Point p = grid.findLocation(loc[i]);
 					if(ship[i].getShipType().getVertical()){
 						
 					}
@@ -275,5 +281,5 @@ public class Battleship extends JPanel implements ActionListener {
 	}
 	
 	
-	// make it rain ships, add icons to when ships are shot and shit, change icons of places that have ships, finish AI, set icons for player ships on ther side so they can know what the fuck is going on
+	// add ships, add icons to when ships are shot and shit, change icons of places that have ships, finish AI, set icons for player ships on ther side so they can know what the fuck is going on
 }
