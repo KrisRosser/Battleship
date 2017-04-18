@@ -167,7 +167,7 @@ public class Battleship extends JPanel implements ActionListener {
 					shipIcon = 5;
 					Location[] loc = ship[i].getLocation(); 
 					Point p = grid.findLocation(loc[i]);
-					if(ship[i].getShipType().getVertical()){
+					if(ship[i].getVertical()){
 						
 					}
 					else{
@@ -196,7 +196,7 @@ public class Battleship extends JPanel implements ActionListener {
 					shipIcon = 4;
 					Location[] loc = ship[i].getLocation(); 
 					Point p = grid.findLocation(loc[i]);
-					if(ship[i].getShipType().getVertical()){
+					if(ship[i].getVertical()){
 						
 					}
 					else{
@@ -221,7 +221,7 @@ public class Battleship extends JPanel implements ActionListener {
 					shipIcon = 3;
 					Location[] loc = ship[i].getLocation(); 
 					Point p = grid.findLocation(loc[i]);
-					if(ship[i].getShipType().getVertical()){
+					if(ship[i].getVertical()){
 						
 					}
 					else{
@@ -242,7 +242,7 @@ public class Battleship extends JPanel implements ActionListener {
 					shipIcon = 3;
 					Location[] loc = ship[i].getLocation(); 
 					Point p = grid.findLocation(loc[i]);
-					if(ship[i].getShipType().getVertical()){
+					if(ship[i].getVertical()){
 						
 					}
 					else {
@@ -263,7 +263,7 @@ public class Battleship extends JPanel implements ActionListener {
 					shipIcon = 3;
 					Location[] loc = ship[i].getLocation(); 
 					Point p = grid.findLocation(loc[i]);
-					if(ship[i].getShipType().getVertical()){
+					if(ship[i].getVertical()){
 						
 					}
 					else{
