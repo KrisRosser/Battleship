@@ -51,7 +51,7 @@ public class Grid extends Observable {
         return location[row][col];		
 	}	
 	
-	private boolean isLegalIndex(int row, int col) {
+	public boolean isLegalIndex(int row, int col) {
 		return ((row >= 0 && row < getHeight())&& (col >= 0 && col < getWidth()));
     }
 	
@@ -150,11 +150,7 @@ public class Grid extends Observable {
 				return p;
 			}
 			}			
-<<<<<<< HEAD
-		}	
-=======
 		}
 		return p;
->>>>>>> bb39c41bab672c221951ffebe5e0dacab74305ab
 	}	
 }
