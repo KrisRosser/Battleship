@@ -83,10 +83,12 @@ public class Grid extends Observable {
 						for(int j = 0; j < s.getHealth(); j++){
 							getLocation(row+j, col).setShip(true);
 						}
-						s.setLocation(location);
+						//s.setLocation(location);
 						shipCount--;
 					}
 				}
+				s.setLocation(location);
+				//System.out.println("Cotney " + s.getLocation().length);
 			}
 			else{
 				for(int i = 0; i < s.getHealth(); i++){
@@ -97,11 +99,13 @@ public class Grid extends Observable {
 						for(int j = 0; j < s.getHealth(); j++){
 							getLocation(row, col+j).setShip(true);
 						}
-						s.setLocation(location);
+						//s.setLocation(location);
 						shipCount--;
 					}
 				}
 			}
+			s.setLocation(location);
+			//System.out.println("Cotney " + s.getLocation().length);
 		}
 		
 	}

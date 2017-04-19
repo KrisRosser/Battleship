@@ -58,4 +58,4 @@ public class Ship{
 		return vertical;
 		
 	}
-}	
+}
