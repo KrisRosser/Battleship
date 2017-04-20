@@ -33,7 +33,7 @@ public class Battleship extends JPanel implements ActionListener {
 	private Grid grid;
 	private Grid gridAI;
 	private JButton[][] AI_button;
-	private JButton[][] button;
+	private JLabel[][] button;
 	private int shipCount;
 	private int ships;
 	private boolean player_enabled;
@@ -67,16 +67,16 @@ public class Battleship extends JPanel implements ActionListener {
 		grid = new Grid(height, width);
 		JPanel gridPanel = new JPanel();
 		gridPanel.setLayout(new GridLayout(height, width));
-		button = new JButton[height][width];
+		button = new JLabel[height][width];
 		for(int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
-				button[i][j] = new JButton();
+				button[i][j] = new JLabel();
 				button[i][j].setName("cell:" + i + ":" + j);
 				button[i][j].setPreferredSize(new Dimension(50,50));
 				button[i][j].setHorizontalAlignment(0);
 				button[i][j].setBorder(BorderFactory.createRaisedBevelBorder());
 				add(button[i][j]);
-				button[i][j].addActionListener(this);
+				//button[i][j].addActionListener(this);
 				gridPanel.add(button[i][j]);
 			}
 		}
@@ -93,13 +93,13 @@ public class Battleship extends JPanel implements ActionListener {
 		panel.add(button);
 		*/
 		panel.add(new JLabel("Player 2: "));
-		shipLabel_2 = new JLabel();
+		shipLabel_2 = new JLabel("" + ships);
 		panel.add(shipLabel_2);
 		shipLabel_2.setName("ships_2");
 		setLayout(new BorderLayout(3, 1));
-		add(gridAIPanel, BorderLayout.NORTH);
+		add(gridAIPanel, BorderLayout.WEST);
 		add(panel, BorderLayout.CENTER);
-		add(gridPanel, BorderLayout.SOUTH);
+		add(gridPanel, BorderLayout.EAST);
 	}
 
 	public void actionPerformed(ActionEvent event) {
@@ -161,7 +161,6 @@ public class Battleship extends JPanel implements ActionListener {
 	public void setShipIcons(){
 		int shipIcon;
 		Ship[] ship = grid.getShipArray();
-		System.out.println("cotney " + ship[1].getLocation().length);
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < ship[i].getHealth(); j++){
 				Location[] location = ship[i].getLocation();
@@ -263,15 +262,14 @@ public class Battleship extends JPanel implements ActionListener {
 					}
 				}
 				if(ship[i].getShipType() == Ship.ShipType.DESTROYER){
-					shipIcon = 3;
+					shipIcon = 2;
 					int r = location[j].getRow();
 					int c =location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
 					else{
-						//int r = location[j].getRow();
-						//int c = location[j].getCol();
+					
 						if(shipIcon == 2){
 							button[r][c].setIcon(DESTROYER_ICON1);
 							shipIcon--;
