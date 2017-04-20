@@ -12,23 +12,6 @@ the enable option should be used to distinguish between the two players. Maybe a
 should house the code for the AI as well. I am also kinda thinking about using the observable even though I really do not want to.*/
 public class Battleship extends JPanel implements ActionListener {
 	
-	private final ImageIcon CARRIER_ICON1 = new ImageIcon(getClass().getClassLoader().getResource("carrier1.png"));
-	private final ImageIcon CARRIER_ICON2 = new ImageIcon(getClass().getClassLoader().getResource("carrier2.png"));
-	private final ImageIcon CARRIER_ICON3 = new ImageIcon(getClass().getClassLoader().getResource("carrier3.png"));
-	private final ImageIcon CARRIER_ICON4 = new ImageIcon(getClass().getClassLoader().getResource("carrier4.png"));
-	private final ImageIcon CARRIER_ICON5 = new ImageIcon(getClass().getClassLoader().getResource("carrier5.png"));
-    private final ImageIcon BATTLESHIP_ICON1 = new ImageIcon(getClass().getClassLoader().getResource("battleship1.png"));
-	private final ImageIcon BATTLESHIP_ICON2 = new ImageIcon(getClass().getClassLoader().getResource("battleship2.png"));
-	private final ImageIcon BATTLESHIP_ICON3 = new ImageIcon(getClass().getClassLoader().getResource("battleship3.png"));
-	private final ImageIcon BATTLESHIP_ICON4 = new ImageIcon(getClass().getClassLoader().getResource("battleship4.png"));
-	private final ImageIcon CRUISER_ICON1 = new ImageIcon(getClass().getClassLoader().getResource("cruiser1.png"));
-	private final ImageIcon CRUISER_ICON2 = new ImageIcon(getClass().getClassLoader().getResource("cruiser2.png"));
-	private final ImageIcon CRUISER_ICON3 = new ImageIcon(getClass().getClassLoader().getResource("cruiser3.png"));
-    private final ImageIcon SUBMARINE_ICON1 = new ImageIcon(getClass().getClassLoader().getResource("submarine1.png"));
-	private final ImageIcon SUBMARINE_ICON2 = new ImageIcon(getClass().getClassLoader().getResource("submarine2.png"));
-	private final ImageIcon SUBMARINE_ICON3 = new ImageIcon(getClass().getClassLoader().getResource("submarine3.png"));
-	private final ImageIcon DESTROYER_ICON1 = new ImageIcon(getClass().getClassLoader().getResource("destroyer1.png"));
-	private final ImageIcon DESTROYER_ICON2 = new ImageIcon(getClass().getClassLoader().getResource("destroyer2.png"));
 	
 	private Grid grid;
 	private Grid gridAI;
@@ -36,16 +19,22 @@ public class Battleship extends JPanel implements ActionListener {
 	private JLabel[][] button;
 	private int shipCount;
 	private int ships;
+	private int AI_ships;
+	private int player_win;
+	private int AI_win;
 	private boolean player_enabled;
 	private boolean AI_enabled;
 	private JLabel shipLabel_1;
 	private JLabel shipLabel_2;
+	private JLabel text;
 	
 	public Battleship() {
 		this(10,10);
 	}
 	
 	public Battleship(int height, int width) {
+		player_win = 0;
+		AI_win = 0;
 		player_enabled = true;
 		AI_enabled = false;
 		gridAI = new Grid(height, width, true);
@@ -82,24 +71,32 @@ public class Battleship extends JPanel implements ActionListener {
 		}
 		setShipIcons();
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1,5));
-		panel.add(new JLabel("Player 1: "));
+		panel.setLayout(new GridLayout(1,3));
+		panel.add(new JLabel("<== AI"));
 		ships = 5;
-		shipLabel_1 = new JLabel("" + ships);
+		shipLabel_1 = new JLabel("");
 		panel.add(shipLabel_1);
 		shipLabel_1.setName("ships_1");
+		
 		/* button = new JButton("Restart");
 		button.addActionListener(this);
 		panel.add(button);
 		*/
-		panel.add(new JLabel("Player 2: "));
-		shipLabel_2 = new JLabel("" + ships);
-		panel.add(shipLabel_2);
+		panel.add(new JLabel("Player ==> "));
+		JPanel messagePanel = new JPanel();
+		messagePanel.setLayout(new GridLayout(1,3));
+		shipLabel_2 = new JLabel("Message Field");
+		messagePanel.add(shipLabel_2);
 		shipLabel_2.setName("ships_2");
-		setLayout(new BorderLayout(3, 1));
+		JLabel blank = new JLabel();
+		messagePanel.add(blank);
+		text = new JLabel("Message Field");
+		messagePanel.add(text);
+		setLayout(new BorderLayout(3, 2));
 		add(gridAIPanel, BorderLayout.WEST);
 		add(panel, BorderLayout.CENTER);
 		add(gridPanel, BorderLayout.EAST);
+		add(messagePanel, BorderLayout.SOUTH);
 	}
 
 	public void actionPerformed(ActionEvent event) {
@@ -109,19 +106,25 @@ public class Battleship extends JPanel implements ActionListener {
 		Point p = findSourceIndex(event);
 		if(gridAI.isEmpty(p.x, p.y)) {
 			gridAI.isMiss(p.x, p.y);
+			AI_button[p.x][p.y].setText("M");
 			AI_button[p.x][p.y].setEnabled(false);
+			text.setText("Player fired and missed!");
 			player_enabled = false;
+			getResult();
 			AI();
 		}
 		if(gridAI.isShip(p.x, p.y)) {
 			gridAI.isHit(p.x, p.y);
+			AI_button[p.x][p.y].setText("X");
 			AI_button[p.x][p.y].setEnabled(false);
+			text.setText("Player fired and hit a ship!");
 			player_enabled = false;
+			player_win++;
+			getResult();
 			AI();
 		}
 	}
 	}
-	
 	 private Point findSourceIndex(ActionEvent event) {
 		Point p = new Point();
 		Component c = (Component)event.getSource();
@@ -143,142 +146,70 @@ public class Battleship extends JPanel implements ActionListener {
 		if(button[x][y].isEnabled()) {
 			if(grid.isEmpty(x, y)) {
 				grid.isMiss(x, y);
+				button[x][y].setText("M");
 				button[x][y].setEnabled(false);
+				shipLabel_2.setText("AI fired and missed!");
+				getResult();
 				player_enabled = true;
-				AI();
 			}
 			if(grid.isShip(x, y)) {
 				grid.isHit(x, y);
+				button[x][y].setText("X");
 				button[x][y].setEnabled(false);
+				AI_win++;
+				shipLabel_2.setText("AI fired and it was a hit!");
+				getResult();
 				player_enabled = true;
-				AI();
 			}
 		}
 		else{
 			AI();
 		}	
 	}
+	private void getResult(){
+		if(player_win == 17){
+			JOptionPane pane = new JOptionPane();
+			JOptionPane.showMessageDialog(null, "You Won!");
+		}
+		else if(AI_win == 17){
+			JOptionPane pane = new JOptionPane();
+			JOptionPane.showMessageDialog(null, "You Lost!");	
+		}	
+	}	
 	public void setShipIcons(){
 		int shipIcon;
 		Ship[] ship = grid.getShipArray();
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < ship[i].getHealth(); j++){
 				Location[] location = ship[i].getLocation();
+				shipIcon = 5;
 				if(ship[i].getShipType() == Ship.ShipType.CARRIER){
-					shipIcon = 5;
+					//shipIcon = 5;
 					//Location[] loc = ship[i].getLocation(); 
 					int r = location[j].getRow();
 					int c = location[j].getCol();
-					if(ship[i].getVertical()){
-						
-					}
-					else{
-						if(shipIcon == 5){
-							button[r][c].setIcon(CARRIER_ICON1);
-							shipIcon--;
-						}	
-						else if(shipIcon == 4){
-							button[r][c].setIcon(CARRIER_ICON2);
-							shipIcon--;
-						}	
-						else if(shipIcon == 3){
-							button[r][c].setIcon(CARRIER_ICON3);
-							shipIcon--;
-						}
-						else if(shipIcon == 2){
-							button[r][c].setIcon(CARRIER_ICON4);
-							shipIcon--;
-						}	
-						else {
-							button[r][c].setIcon(CARRIER_ICON5);
-						}	
-					}
+					button[r][c].setText("C" + j);
 				}
 				if(ship[i].getShipType() == Ship.ShipType.BATTLESHIP){
-					shipIcon = 4;
-					int r = location[j].getRow();
-					int c =location[j].getCol();
-					if(ship[i].getVertical()){
-						
-					}
-					else{
-						if(shipIcon == 4){
-							button[r][c].setIcon(BATTLESHIP_ICON1);
-							shipIcon--;
-						}	
-						else if(shipIcon == 3){
-							button[r][c].setIcon(BATTLESHIP_ICON2);
-							shipIcon--;
-						}	
-						else if(shipIcon == 2){
-							button[r][c].setIcon(BATTLESHIP_ICON3);
-							shipIcon--;
-						}
-						else {
-							button[r][c].setIcon(BATTLESHIP_ICON4);
-						}	
-					}
-				}
-				if(ship[i].getShipType() == Ship.ShipType.CRUISER){
-					shipIcon = 3;
-					int r = location[j].getRow();
-					int c =location[j].getCol();
-					if(ship[i].getVertical()){
-						
-					}
-					else{
-						if(shipIcon == 3){
-							button[r][c].setIcon(CRUISER_ICON1);
-							shipIcon--;
-						}	
-						else if(shipIcon == 2){
-						button[r][c].setIcon(CRUISER_ICON2);
-							shipIcon--;
-						}
-						else {
-							button[r][c].setIcon(CRUISER_ICON3);
-						}
-					}
-				}
-				if(ship[i].getShipType() == Ship.ShipType.SUBMARINE){
-					shipIcon = 3;
 					int r = location[j].getRow();
 					int c = location[j].getCol();
-					if(ship[i].getVertical()){
-						
-					}
-					else {
-						if(shipIcon == 3){
-							button[r][c].setIcon(SUBMARINE_ICON1);
-							shipIcon--;
-						}	
-						else if(shipIcon == 2){
-							button[r][c].setIcon(SUBMARINE_ICON2);
-							shipIcon--;
-						}
-						else {
-							button[r][c].setIcon(SUBMARINE_ICON3);
-						}
-					}
+					button[r][c].setText("B" + j);
 				}
-				if(ship[i].getShipType() == Ship.ShipType.DESTROYER){
-					shipIcon = 2;
+				if(ship[i].getShipType() == Ship.ShipType.CRUISER){
 					int r = location[j].getRow();
-					int c =location[j].getCol();
-					if(ship[i].getVertical()){
-						
-					}
-					else{
-					
-						if(shipIcon == 2){
-							button[r][c].setIcon(DESTROYER_ICON1);
-							shipIcon--;
-						}	
-						else {
-							button[r][c].setIcon(DESTROYER_ICON2);
-						}
-					}
-				}
+					int c = location[j].getCol();
+					button[r][c].setText("CR" + j);
+				}	
+				if(ship[i].getShipType() == Ship.ShipType.SUBMARINE){
+					int r = location[j].getRow();
+					int c = location[j].getCol();
+					button[r][c].setText("S" + j);
+				}	
+				if(ship[i].getShipType() == Ship.ShipType.DESTROYER){
+					int r = location[j].getRow();
+					int c = location[j].getCol();
+					button[r][c].setText("D" + j);
+				}	
 			}
 		}	
 	}
