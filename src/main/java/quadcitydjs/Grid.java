@@ -73,40 +73,22 @@ public class Grid extends Observable {
     
     public void setShipLocation(int row, int col, Ship s){
 		Location[] location = new Location[s.getHealth()];
-		if(isLegalIndex(row,col)){
-			if(s.getVertical()){
-				for(int i = 0; i < s.getHealth(); i++){
-					if(isLegalIndex(row+i,col)){
-						location[i] = getLocation(row+i,col);
-					}
-					if(location.length == s.getHealth()){
-						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row+j, col).setShip(true);
-						}
-						//s.setLocation(location);
-						shipCount--;
-					}
-				}
-				s.setLocation(location);
-				//System.out.println("Cotney " + s.getLocation().length);
-			}
-			else{
-				for(int i = 0; i < s.getHealth(); i++){
-					if(isLegalIndex(row,col+i)){
-						location[i] = getLocation(row,col+i);
-					}
-					if(location.length == s.getHealth()){
-						for(int j = 0; j < s.getHealth(); j++){
-							getLocation(row, col+j).setShip(true);
-						}
-						//s.setLocation(location);
-						shipCount--;
-					}
-				}
-			}
-			s.setLocation(location);
-			//System.out.println("Cotney " + s.getLocation().length);
-		}
+		Point[] locs = new Point[location.length];
+        int dx = 0;
+        int dy = 0;
+        if(s.getVertical()) dy = 1;
+        else dx = 1;
+        for(int i = 0; i < locs.length; i++) {
+            locs[i] = new Point(row + i*dy, col + i*dx);
+            if(!isLegalIndex(locs[i].x, locs[i].y)) return;
+			if(getLocation(locs[i].x, locs[i].y).hasShip()) return;
+        }
+        for(int i = 0; i < locs.length; i++){
+		location[i] = this.location[locs[i].x][locs[i].y];
+            location[i].setShip(true);
+        }
+        s.setLocation(location);
+        shipCount--;
 		
 	}
 	public boolean isEmpty(int row, int col) {
