@@ -161,15 +161,15 @@ public class Battleship extends JPanel implements ActionListener {
 	public void setShipIcons(){
 		int shipIcon;
 		Ship[] ship = grid.getShipArray();
-		System.out.println("cotney" + ship[1].getLocation().length);
+		System.out.println("cotney " + ship[1].getLocation().length);
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < ship[i].getHealth(); j++){
 				Location[] location = ship[i].getLocation();
 				if(ship[i].getShipType() == Ship.ShipType.CARRIER){
 					shipIcon = 5;
 					//Location[] loc = ship[i].getLocation(); 
-					int r = location[i].getRow();
-					int c =location[i].getCol();
+					int r = location[j].getRow();
+					int c = location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
@@ -179,103 +179,105 @@ public class Battleship extends JPanel implements ActionListener {
 							shipIcon--;
 						}	
 						else if(shipIcon == 4){
-							button[c][r].setIcon(CARRIER_ICON2);
+							button[r][c].setIcon(CARRIER_ICON2);
 							shipIcon--;
 						}	
 						else if(shipIcon == 3){
-							button[c][r].setIcon(CARRIER_ICON3);
+							button[r][c].setIcon(CARRIER_ICON3);
 							shipIcon--;
 						}
 						else if(shipIcon == 2){
-							button[c][r].setIcon(CARRIER_ICON4);
+							button[r][c].setIcon(CARRIER_ICON4);
 							shipIcon--;
 						}	
 						else {
-							button[c][r].setIcon(CARRIER_ICON5);
+							button[r][c].setIcon(CARRIER_ICON5);
 						}	
 					}
 				}
 				if(ship[i].getShipType() == Ship.ShipType.BATTLESHIP){
 					shipIcon = 4;
-					int r = location[i].getRow();
-					int c =location[i].getCol();
+					int r = location[j].getRow();
+					int c =location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
 					else{
 						if(shipIcon == 4){
-							button[c][r].setIcon(BATTLESHIP_ICON1);
+							button[r][c].setIcon(BATTLESHIP_ICON1);
 							shipIcon--;
 						}	
 						else if(shipIcon == 3){
-							button[c][r].setIcon(BATTLESHIP_ICON2);
+							button[r][c].setIcon(BATTLESHIP_ICON2);
 							shipIcon--;
 						}	
 						else if(shipIcon == 2){
-							button[c][r].setIcon(BATTLESHIP_ICON3);
+							button[r][c].setIcon(BATTLESHIP_ICON3);
 							shipIcon--;
 						}
 						else {
-							button[c][r].setIcon(BATTLESHIP_ICON4);
+							button[r][c].setIcon(BATTLESHIP_ICON4);
 						}	
 					}
 				}
 				if(ship[i].getShipType() == Ship.ShipType.CRUISER){
 					shipIcon = 3;
-					int r = location[i].getRow();
-					int c =location[i].getCol();
+					int r = location[j].getRow();
+					int c =location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
 					else{
 						if(shipIcon == 3){
-							button[c][r].setIcon(CRUISER_ICON1);
+							button[r][c].setIcon(CRUISER_ICON1);
 							shipIcon--;
 						}	
 						else if(shipIcon == 2){
-						button[c][r].setIcon(CRUISER_ICON2);
+						button[r][c].setIcon(CRUISER_ICON2);
 							shipIcon--;
 						}
 						else {
-							button[c][r].setIcon(CRUISER_ICON3);
+							button[r][c].setIcon(CRUISER_ICON3);
 						}
 					}
 				}
 				if(ship[i].getShipType() == Ship.ShipType.SUBMARINE){
 					shipIcon = 3;
-					int r = location[i].getRow();
-					int c =location[i].getCol();
+					int r = location[j].getRow();
+					int c = location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
 					else {
 						if(shipIcon == 3){
-							button[c][r].setIcon(SUBMARINE_ICON1);
+							button[r][c].setIcon(SUBMARINE_ICON1);
 							shipIcon--;
 						}	
 						else if(shipIcon == 2){
-							button[c][r].setIcon(SUBMARINE_ICON2);
+							button[r][c].setIcon(SUBMARINE_ICON2);
 							shipIcon--;
 						}
 						else {
-							button[c][r].setIcon(SUBMARINE_ICON3);
+							button[r][c].setIcon(SUBMARINE_ICON3);
 						}
 					}
 				}
 				if(ship[i].getShipType() == Ship.ShipType.DESTROYER){
 					shipIcon = 3;
-					int r = location[i].getRow();
-					int c =location[i].getCol();
+					int r = location[j].getRow();
+					int c =location[j].getCol();
 					if(ship[i].getVertical()){
 						
 					}
 					else{
+						//int r = location[j].getRow();
+						//int c = location[j].getCol();
 						if(shipIcon == 2){
-							button[c][r].setIcon(DESTROYER_ICON1);
+							button[r][c].setIcon(DESTROYER_ICON1);
 							shipIcon--;
 						}	
 						else {
-							button[c][r].setIcon(DESTROYER_ICON2);
+							button[r][c].setIcon(DESTROYER_ICON2);
 						}
 					}
 				}

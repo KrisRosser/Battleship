@@ -32,7 +32,7 @@ public class Grid extends Observable {
 		createFleet();
 		this.shipCount = 5;
 		
-		if(ai){
+		//if(ai){
 			Random random = new Random();
 			for(int i=0; i < ship.length; i++){
 				boolean bool = random.nextBoolean();
@@ -42,7 +42,7 @@ public class Grid extends Observable {
 			while(shipCount > 0){
 				setShipLocation(random.nextInt(10), random.nextInt(10), ship[shipCount-1]);
 			}
-		}
+		//}
 			
 			
     }
