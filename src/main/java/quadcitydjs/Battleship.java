@@ -7,9 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Point;
 
-/* I am thnking that this class will handle the GUI much like minesweeper. I also believe that we should use
-the enable option should be used to distinguish between the two players. Maybe add a player_enable and AI_enable. I also think this class
-should house the code for the AI as well. I am also kinda thinking about using the observable even though I really do not want to.*/
+
 public class Battleship extends JPanel implements ActionListener {
 	
 	
@@ -65,7 +63,6 @@ public class Battleship extends JPanel implements ActionListener {
 				button[i][j].setHorizontalAlignment(0);
 				button[i][j].setBorder(BorderFactory.createRaisedBevelBorder());
 				add(button[i][j]);
-				//button[i][j].addActionListener(this);
 				gridPanel.add(button[i][j]);
 			}
 		}
@@ -77,11 +74,6 @@ public class Battleship extends JPanel implements ActionListener {
 		shipLabel_1 = new JLabel("");
 		panel.add(shipLabel_1);
 		shipLabel_1.setName("ships_1");
-		
-		/* button = new JButton("Restart");
-		button.addActionListener(this);
-		panel.add(button);
-		*/
 		panel.add(new JLabel("Player ==> "));
 		JPanel messagePanel = new JPanel();
 		messagePanel.setLayout(new GridLayout(1,3));
@@ -184,8 +176,6 @@ public class Battleship extends JPanel implements ActionListener {
 				Location[] location = ship[i].getLocation();
 				shipIcon = 5;
 				if(ship[i].getShipType() == Ship.ShipType.CARRIER){
-					//shipIcon = 5;
-					//Location[] loc = ship[i].getLocation(); 
 					int r = location[j].getRow();
 					int c = location[j].getCol();
 					button[r][c].setText("C" + j);
@@ -215,5 +205,6 @@ public class Battleship extends JPanel implements ActionListener {
 	}
 	
 	
-	// add ships, add icons to when ships are shot and shit, change icons of places that have ships, finish AI, set icons for player ships on ther side so they can know what the fuck is going on
+	
+	
 }
