@@ -52,10 +52,6 @@ These tests cover functionality of all the files, methods, and algorithms used.
 build\reports\tests\test\index.html will provide you with a complete and easy to read breakdown of all tests.
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [Gradle Software Develpment Tool] https://gradle.org/
