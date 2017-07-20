@@ -62,10 +62,14 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Framework designed by Dr. Aaron Garrett** The students who worked on this project were Kristofer Rosser, Travis Cotney, and Morgan Sweatman. 
+* **Framework designed by Dr. Aaron Garrett** 
+
+The students who worked on this project were Kristofer Rosser, Travis Cotney, and Morgan Sweatman. 
 
 See also the list of contributors(https://github.com/KrisRosser/Battleship/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is not licensed to my knowledge, and was a created as an assignment for a CS 232 advanced programming class. 
+MIT licensed.
+
+See LICENSE.md for details.
