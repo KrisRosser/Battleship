@@ -19,18 +19,18 @@ You will need Java Runtime Environment version 7 or higher.
 ```
 Java is the programming language for this software.
 ```
-For easy development and debug this software is designed with Gradle Software tool.
+For easy development and debugging this software was designed with Gradle Software Development Build Tool.
 ```
-Gradle is not technically necessary, but is recommended
+Gradle is not technically necessary, but is recommended. https://gradle.org/
 ```
 
 ### Installing
 
 Download or clone this repository to a folder of your choice.
 
-I would recommend including a gitIgnore file.
+I would recommend including a .gitignore file for convienience.
 
-This project is designed to be used in conjunction with Gradle software develoment tool.
+This project is designed to be used in conjunction with Gradle Software Develoment Tool.
 
 Once in all files are situated, simple use Gradle Run or Gradle Runrobot to play and/or test the program.
 
@@ -44,18 +44,12 @@ Using the command "gradle runrobot" will perform the Gradle build and the have a
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+This software comes with a battery of unit tests included.
+
+These tests cover functionality of all the files, methods, and algorithms used.
 
 ```
-Give an example
-```
-
-### And coding style tests
-
-This software come with a battery of unit tests included.
-
-```
-build\reports\tests\test\index.html will provide you with an easy to read summary of your tests.
+build\reports\tests\test\index.html will provide you with a complete and easy to read breakdown of all tests.
 ```
 
 ## Deployment
@@ -64,16 +58,14 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Gradle] https://gradle.org/
+* [Gradle Software Develpment Tool] https://gradle.org/
 
 ## Authors
 
 * **Framework designed by Dr. Aaron Garrett** The students who worked on this project were Kristofer Rosser, Travis Cotney, and Morgan Sweatman. 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of contributors(https://github.com/KrisRosser/Battleship/graphs/contributors) who participated in this project.
 
 ## License
 
 This project is not licensed to my knowledge, and was a created as an assignment for a CS 232 advanced programming class. 
-
-
