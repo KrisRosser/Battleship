@@ -32,19 +32,16 @@ public class Grid extends Observable {
 		createFleet();
 		this.shipCount = 5;
 		
-		//if(ai){
-			Random random = new Random();
-			for(int i=0; i < ship.length; i++){
+		Random random = new Random();
+		for(int i=0; i < ship.length; i++){
 				boolean bool = random.nextBoolean();
 				if(bool) ship[i].setVertical(false);
 				else ship[i].setVertical(true);
-			}
-			while(shipCount > 0){
-				setShipLocation(random.nextInt(10), random.nextInt(10), ship[shipCount-1]);
-			}
-		//}
-			
-			
+		}
+		while(shipCount > 0){
+			setShipLocation(random.nextInt(10), random.nextInt(10), ship[shipCount-1]);
+		}
+		
     }
 	
 	public Location getLocation(int row, int col) {
@@ -130,11 +127,11 @@ public class Grid extends Observable {
 		Point p = new Point();
 		for(int i = 0; i < getHeight(); i++){
 			for(int j = 0; j < getWidth(); j++){
-			if(location[i][j] == loc){
-				p.x = i;
-				p.y = j;
-				return p;
-			}
+				if(location[i][j] == loc){
+					p.x = i;
+					p.y = j;
+					return p;
+				}
 			}			
 		}
 		return p;

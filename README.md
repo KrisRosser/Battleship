@@ -11,18 +11,18 @@ This version has the player trying to defeat an AI opponent of my creation.
 
 What things you need to install the software and how to install them
 
-You will need a file decrompression tool.
-```
+You will need a file decrompression tool. //change this. dont use grey. grey for commands and code.
+
 Winzip, 7zip, File Explorer, etc.
-```
+
 You will need Java Runtime Environment version 7 or higher.
-```
+
 Java is the programming language for this software.
-```
+
 For easy development and debugging this software was designed with Gradle Software Development Build Tool.
-```
+
 Gradle is not technically necessary, but is recommended. https://gradle.org/
-```
+
 
 ### Installing
 
@@ -32,7 +32,7 @@ I would recommend including a .gitignore file for convienience.
 
 This project is designed to be used in conjunction with Gradle Software Develoment Tool.
 
-Once in all files are situated, simple use Gradle Run or Gradle Runrobot to play and/or test the program.
+Once in all files are situated, simple use gradle run or gradle runrobot to play and/or test the program.
 
 ## Running the tests
 
